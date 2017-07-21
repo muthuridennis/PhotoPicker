@@ -49,6 +49,8 @@ public class ImageCaptureManager {
       }
     }
 
+    Log.d("storageDir", storageDir.getPath());
+
     File image = new File(storageDir, imageFileName);
 
     // Save a file: path for use with ACTION_VIEW intents
@@ -72,27 +74,29 @@ public class ImageCaptureManager {
       }
 
       // Continue only if the File was successfully created
+
       if (photoFile != null) {
+          Log.d("photoFile >>>>> ", photoFile.getPath());
+          Log.d("MediaStore.EXTRA_OUTPUT", MediaStore.EXTRA_OUTPUT);
+
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile);
       }
     }
     return takePictureIntent;
   }
 
-
-  public void galleryAddPic() {
-    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-
-    if (TextUtils.isEmpty(mCurrentPhotoPath)) {
-      return;
-    }
-
-    File f = new File(mCurrentPhotoPath);
-    Uri contentUri = Uri.fromFile(f);
-    mediaScanIntent.setData(contentUri);
-    mContext.sendBroadcast(mediaScanIntent);
-  }
-
+//  public void galleryAddPic() {
+//    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//
+//    if (TextUtils.isEmpty(mCurrentPhotoPath)) {
+//      return;
+//    }
+//
+//    File f = new File(mCurrentPhotoPath);
+//    Uri contentUri = Uri.fromFile(f);
+//    mediaScanIntent.setData(contentUri);
+//    mContext.sendBroadcast(mediaScanIntent);
+//  }
 
   public String getCurrentPhotoPath() {
     return mCurrentPhotoPath;

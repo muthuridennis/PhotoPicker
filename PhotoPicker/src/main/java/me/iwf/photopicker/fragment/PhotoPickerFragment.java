@@ -1,5 +1,6 @@
 package me.iwf.photopicker.fragment;
 
+import android.content.Context;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,7 +28,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.iwf.photopicker.PhotoPicker;
 import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.R;
 import me.iwf.photopicker.adapter.PhotoGridAdapter;
@@ -231,15 +231,17 @@ public class PhotoPickerFragment extends Fragment {
 
   @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == ImageCaptureManager.REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-
       if (captureManager == null) {
         FragmentActivity activity = getActivity();
         captureManager = new ImageCaptureManager(activity);
       }
 
-      captureManager.galleryAddPic();
+//      Commented out the line below because the broadcast displays an extra image to the photopicker.
+//      captureManager.galleryAddPic();
+
       if (directories.size() > 0) {
         String path = captureManager.getCurrentPhotoPath();
+
         PhotoDirectory directory = directories.get(INDEX_ALL_PHOTOS);
         directory.getPhotos().add(INDEX_ALL_PHOTOS, new Photo(path.hashCode(), path));
         directory.setCoverPath(path);

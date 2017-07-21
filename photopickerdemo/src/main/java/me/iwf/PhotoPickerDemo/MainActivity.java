@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
       List<String> photos = null;
       if (data != null) {
         photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+
       }
       selectedPhotos.clear();
 

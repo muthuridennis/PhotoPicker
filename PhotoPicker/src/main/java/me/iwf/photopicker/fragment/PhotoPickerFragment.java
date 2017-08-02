@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -236,8 +238,12 @@ public class PhotoPickerFragment extends Fragment {
         captureManager = new ImageCaptureManager(activity);
       }
 
-//      Commented out the line below because the broadcast displays an extra image to the photopicker.
-//      captureManager.galleryAddPic();
+//      Only run the update function on samsung makes
+      String deviceName = Build.MANUFACTURER;
+
+      if(deviceName.contains("samsung")){
+        captureManager.galleryAddPic();
+      }
 
       if (directories.size() > 0) {
         String path = captureManager.getCurrentPhotoPath();
